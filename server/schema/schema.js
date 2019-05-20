@@ -32,7 +32,6 @@ const RootQuery = new GraphQLObjectType({
         return _.find(books,{id:args.id});
       }
     }
-
   }
 })
 
