@@ -7,6 +7,7 @@ const {
   GraphQLInt,
   GraphQLSchema,
   GraphQLID,
+  GraphQLList
 } = graphql;
 
 /* DUMMY DATA */
@@ -25,6 +26,8 @@ let authors = [
 
 const BookType = new GraphQLObjectType({
   name:'Book',
+  // wrap inside a function cause is kind like catch 212, not executing this
+  // function untill sort point, after all the file or functuon inside this file is run
   fields:() => ({
     id: {type: GraphQLID},
     name: {type: GraphQLString},
@@ -43,7 +46,13 @@ const AuthorType = new GraphQLObjectType({
   fields:() => ({
     id: {type: GraphQLID},
     name: {type: GraphQLString},
-    age: {type: GraphQLInt}
+    age: {type: GraphQLInt},
+    books:{
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return _.filter(books, {authorId: parent.id})
+      }
+    }
   })
 });
 
