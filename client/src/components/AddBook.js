@@ -12,7 +12,7 @@ class AddBook extends Component {
     this.state = {
       name:"",
       genre:"",
-      authorId: "",
+      authorId:"",
     };
 
     this.submitForm = this.submitForm.bind(this);
@@ -31,7 +31,13 @@ class AddBook extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    this.props.addBookMutation();
+    this.props.addBookMutation({
+      variables: {
+        name: this.state.name,
+        genre: this.state.genre,
+        authorId: this.state.authorId
+      }
+    });
   }
 
   render() {
@@ -48,12 +54,12 @@ class AddBook extends Component {
 
         <div className="field">
           <label>Genre:</label>
-          <input type="text" onChange={(e)=>this.setState({genre: e.target.value})}/>
+          <input type="text" onChange={(e)=>this.setState({genre:e.target.value})}/>
         </div>
 
         <div className="field">
           <label>Author:</label>
-          <select onChange={this.childOnChange.authorId}>
+          <select onChange={(e)=>this.setState({authorId:e.target.value})}>
             <option>Select author</option>
             { this.displayAuthors() }
           </select>
