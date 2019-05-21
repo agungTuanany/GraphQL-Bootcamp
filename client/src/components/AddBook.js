@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 
 /* queries */
-import { getAuthorsQuery } from '../queries/queries';
+import { getAuthorsQuery, addBookMutation } from '../queries/queries';
 
 class AddBook extends Component {
 
@@ -19,7 +19,7 @@ class AddBook extends Component {
   }
 
   displayAuthors() {
-    const data = this.props.data;
+    const data = this.props.getAuthorsQuery;
     if(data.loading) {
       return ( <option>Loading Authors</option> );
     }else {
@@ -29,22 +29,18 @@ class AddBook extends Component {
     }
   };
 
-  childOnChange(e) {
-    this.setState({
-      name: e.target.value,
-      genre: e.target.value,
-      authorId: e.target.value
-    });
-  };
-
   submitForm(e) {
     e.preventDefault();
-    console.log(this.state)
+    this.props.addBookMutation();
   }
 
   render() {
     return (
       <form id="add-book" onSubmit={this.submitForm}>
+        <header>
+          <h4>Add Book Form</h4>
+          <p>Submit your book, as you know</p>
+        </header>
         <div className="field">
           <label>Book name:</label>
           <input type="text" onChange={(e)=>this.setState({name:e.target.value})} />
@@ -70,4 +66,10 @@ class AddBook extends Component {
   }
 }
 
-export default graphql(getAuthorsQuery) (AddBook);
+/*
+compose is a react-apollo method to combine several queires into one default export
+*/
+export default compose(
+  graphql(getAuthorsQuery, {name:"getAuthorsQuery"}),
+  graphql(addBookMutation, {name:"addBookMutation"})
+) (AddBook);
