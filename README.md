@@ -1,11 +1,11 @@
 # GraphQL-Bootcamp
 
-Learn a basic concept for using GraphQL in real-world cases, In this bootcamp lecture
-from 'The Net Ninja' youtuber channel, He explain with his explanatory is so
-grasp-full the concept what are you writing on, why you writing the code and how
+Learn a basic concept for using GraphQL in real-world cases.
+from [The Net Ninja](https://www.youtube.com/channel/UCW5YeuERMmlnqo4oq8vwUpg) youtuber channel,
+His explanatory is so grasp-full for the concept what are you writing on, why you writing the code and how
 you writing in convention way.
 
-At the last Bootcamp we make some basic project called a bookstore, with React,
+At last bootcamp, we make some basic project called a bookstore, with React,
 NodeJS, Express, GraphQL,
 
 ## Getting Started
